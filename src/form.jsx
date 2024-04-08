@@ -87,27 +87,27 @@ function SignupForm() {
       newErrors.mobileError = "กรุณากรอกข้อมูลให้ถูกต้อง";
     }
 
- // Check if password has at least 8 characters
- if (formData.password.length < 8) {
-    newErrors.passwordError = "กรุณากรอกรหัสผ่านอย่างน้อย 8 ตัว";
-  }
-
-  // Check for any errors in the form
-  for (const key in errors) {
-    if (errors[key] !== "") {
-      newErrors.acceptTermsError = "กรุณากรอกข้อมูลให้ถูกต้อง";
-      break;
+    // Check if password has at least 8 characters
+    if (formData.password.length < 8) {
+      newErrors.passwordError = "กรุณากรอกรหัสผ่านอย่างน้อย 8 ตัว";
     }
-  }
 
-  setErrors(newErrors);
+    // Check for any errors in the form
+    for (const key in errors) {
+      if (errors[key] !== "") {
+        newErrors.acceptTermsError = "กรุณากรอกข้อมูลให้ถูกต้อง";
+        break;
+      }
+    }
 
-  if (Object.values(newErrors).every((error) => error === "")) {
-    alert("ลงทะเบียนสำเร็จ");
-  } else {
-    alert("กรุณากรอกข้อมูลให้ถูกต้อง");
-  }
-};
+    setErrors(newErrors);
+
+    if (Object.values(newErrors).every((error) => error === "")) {
+      alert("ลงทะเบียนสำเร็จ");
+    } else {
+      alert("กรุณากรอกข้อมูลให้ถูกต้อง");
+    }
+  };
 
   const days = Array.from({ length: 31 }, (_, i) => i + 1); // วันที่ 1-31
   const months = [
@@ -134,6 +134,7 @@ function SignupForm() {
           <h5 className="fw-bolder mb-3">ข้อมูลทั่วไป</h5>
           <div className="rounded border p-4">
             <div className="row">
+              {/* ส่วนของชื่อ-สกุล ภาษาไทย */}
               <div className="col-lg-2 mb-3">
                 <label htmlFor="nameTitleTha" className="form-label">
                   คำนำหน้า <span className="text-danger">*</span>
@@ -187,6 +188,7 @@ function SignupForm() {
                 />
               </div>
             </div>
+            {/* ส่วนของชื่อ-สกุล ภาษาอังกฤษ */}
             <div className="row">
               <div className="col-lg-2 mb-3">
                 <label htmlFor="nameTitleEng" className="form-label">
@@ -244,6 +246,7 @@ function SignupForm() {
                 </div>
               </div>
             </div>
+            {/* ส่วนของวันเกิด */}
             <div className="row">
               <div className="col-lg-3 mb-3">
                 <label htmlFor="birthDate" className="form-label">
@@ -306,6 +309,7 @@ function SignupForm() {
                 <div className="invalid-feedback">กรุณาเลือกปีเกิด (พ.ศ.)</div>
               </div>
             </div>
+            {/* ส่วนของหมายเลขบัตรประชาชน */}
             <div className="mb-3">
               <label htmlFor="idCard" className="form-label">
                 หมายเลขบัตรประชาชน <span className="text-danger">*</span>
@@ -325,6 +329,7 @@ function SignupForm() {
               <div className="invalid-feedback">{errors.idCardError}</div>
             </div>
           </div>
+          {/* ส่วนของรหัสผ่าน */}
           <h5 className="fw-bolder mt-5 mb-3">สร้างรหัสผ่าน</h5>
           <div className="rounded border p-4">
             <div className="mb-3">
@@ -346,6 +351,7 @@ function SignupForm() {
               <div className="invalid-feedback">{errors.passwordError}</div>
             </div>
           </div>
+          {/* ส่วนของข้อมูลติดต่อ */}
           <h5 className="fw-bolder mt-5 mb-3">ข้อมูลติดต่อ</h5>
           <div className="rounded border p-4">
             <div className="mb-3">
@@ -382,6 +388,7 @@ function SignupForm() {
               <div className="invalid-feedback">{errors.emailError}</div>
             </div>
           </div>
+          {/* ส่วนของการยอมรับเงื่อนไข */}
           <div className="form-check mt-4">
             <input
               className="form-check-input"
@@ -396,13 +403,18 @@ function SignupForm() {
               เพื่อใช้สำหรับลงทะเบียนหลักสูตรระยะสั้น
               ของคณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏนครปฐม
             </label>
-            <div className="invalid-feedback d-block">
-              {errors.acceptTermsError}
-            </div>
           </div>
-          <button className="btn btn-primary mt-3" onClick={handleSubmit}>
-            ลงทะเบียน
-          </button>
+          <div className="text-danger">{errors.acceptTermsError}</div>
+          {/* ปุ่มยืนยัน */}
+          <div className="text-center mt-4">
+            <button
+              type="submit"
+              className="btn btn-primary"
+              onClick={handleSubmit}
+            >
+              ลงทะเบียน
+            </button>
+          </div>
         </div>
       </div>
     </section>
